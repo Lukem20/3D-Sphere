@@ -3,11 +3,7 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls"
 import gsap from 'gsap';
 import './style.css'
 
-//Create Scene
   const scene = new THREE.Scene();
-
-
-//Create Sphere
   const geometry = new THREE.SphereGeometry(3, 64, 64);
   const material = new THREE.MeshStandardMaterial({
     color: '#119h83',
@@ -17,22 +13,19 @@ import './style.css'
   scene.add(mesh);
 
 
-//Sizes
+
   const sizes = {
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
+    aspect: window.innerWidth / window.innerHeight
   }
 
-
-//Light
   const light = new THREE.PointLight(0xfffff, 1, 100);
   light.position.set(10, 10, 10);
   light.intensity = 1.3
   scene.add(light);
-  
 
-//Create Camera
-  const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
+  const camera = new THREE.PerspectiveCamera(45, sizes.aspect, 0.1, 100);
   camera.position.z = 20;
   scene.add(camera);
 
@@ -61,7 +54,7 @@ import './style.css'
 
     //Update Camera
     camera.updateProjectionMatrix();
-    camera.aspect = sizes.width / sizes.height;
+    camera.aspect = sizes.aspect;
     renderer.setSize(sizes.width, sizes.height);
   });
 
